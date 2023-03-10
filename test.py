@@ -16,4 +16,4 @@ url = os.environ["GITHUB_SERVER_URL"]
 repo = os.environ["GITHUB_REPOSITORY"]
 ref = os.environ["GITHUB_REF"]
 
-print(f"{url}/{repo}/.github/workflows/test-sign.yml@{ref}"
+print(f"{url}/{repo}/.github/workflows/test-sign.yml@{ref}")
