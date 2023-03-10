@@ -14,5 +14,5 @@ jobs:
 
       - name: Testing...
         run: |
-          pip install git+https://github.com//secure-systems-lab/securesystemslib
+          pip install git+https://github.com//secure-systems-lab/securesystemslib sigstore
           python test.py
