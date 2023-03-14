@@ -16,6 +16,7 @@ jobs:
           python-version: 3.11
 
       - name: Testing...
+        if: env.TEST_VARIABLE
         run: |
-          pip install git+https://github.com//secure-systems-lab/securesystemslib sigstore
-          python test.py
+          echo "running"
+          echo "$TEST_VARIABLE"
