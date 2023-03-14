@@ -11,12 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/setup-python@d27e3f3d7c64b4bbf8e4abfb9b63b83e846e0435
-        with:
-          python-version: 3.11
+      - name: Prep...
+        run: echo "prep $TEST_VARIABLE"
 
       - name: Testing...
-        if: env.TEST_VARIABLE
+        if: env.TEST_VARIABLE 
         run: |
           echo "running"
           echo "$TEST_VARIABLE"
