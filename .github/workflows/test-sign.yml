@@ -11,14 +11,10 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Prep...
-        env:
-          test_var: ${{ vars.TEST_VARIABLE }}
         run: echo "prep $test_var"
 
       - name: Testing...
-        env:
-          test_var: ${{ vars.TEST_VARIABLE }}
-        if: env.test_var 
+        if: vars.TEST_VARIABLE 
         run: |
           echo "running"
           echo "$test_var"
