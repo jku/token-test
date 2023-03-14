@@ -7,15 +7,16 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
-
+    env:
+      test_var: ${{ vars.TEST_VARIABLE }}
     steps:
       - uses: actions/checkout@v3
 
       - name: Prep...
-        run: echo "prep $TEST_VARIABLE"
+        run: echo "prep $test_var"
 
       - name: Testing...
-        if: env.TEST_VARIABLE 
+        if: env.test_var 
         run: |
           echo "running"
-          echo "$TEST_VARIABLE"
+          echo "$test_var"
