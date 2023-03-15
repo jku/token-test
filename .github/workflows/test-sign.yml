@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Prep...
-        run: echo "prep $test_var"
+        run: git config --get remote.origin.url
 
       - name: Testing...
         if: vars.TEST_VARIABLE 
