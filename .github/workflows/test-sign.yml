@@ -10,11 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Prep...
-        run: git config --get remote.origin.url
-
-      - name: Testing...
-        if: vars.TEST_VARIABLE 
+      - name: Test gh
         run: |
-          echo "running"
-          echo "$test_var"
+          gh issue list
+          echo $?
+          gh issue list --search "abcd"
+          echo $?
+          gh search issues "abcd"
+          echo $?
+
+          gh issue create --title "issue filed from CI for testing" --body "moar text"
