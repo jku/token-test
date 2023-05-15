@@ -9,7 +9,7 @@ from filecmp import cmp
 from tempfile import TemporaryDirectory
 from typing import Optional
 
-import build as _  # type: ignore
+import build
 
 import requests
 
@@ -23,7 +23,7 @@ PYPI_PROJECT = "tuf"
 HTTP_TIMEOUT = 5
 
 
-def build(build_dir: str) -> str:
+def _build(build_dir: str) -> str:
     """Build release locally. Return version as string"""
     orig_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -183,7 +183,7 @@ def main() -> int:
     success = True
     with TemporaryDirectory() as build_dir:
         progress("Building release")
-        build_version = build(build_dir)
+        build_version = _build(build_dir)
         finished(f"Built release {build_version}")
 
         git_version = get_git_version()
