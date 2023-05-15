@@ -1,0 +1,16 @@
+name: CI
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@57ded4d7d5e986d7296eab16560982c6dd7c923b
+        with:
+          python-version: 3.x
+      - run: python3 -m pip install mypy isort
+      - run: |
+          isort verify_release
+          mypy verify_release
