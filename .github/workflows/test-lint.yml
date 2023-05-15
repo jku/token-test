@@ -12,5 +12,5 @@ jobs:
           python-version: "3.10"
       - run: python3 -m pip install mypy isort build
       - run: |
-          isort verify_release
+          isort --check --diff verify_release
           mypy verify_release
