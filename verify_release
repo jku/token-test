@@ -10,7 +10,6 @@ from tempfile import TemporaryDirectory
 from typing import Optional
 
 import build
-
 import requests
 
 # Project variables
