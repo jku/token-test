@@ -10,7 +10,7 @@ jobs:
       - uses: actions/setup-python@57ded4d7d5e986d7296eab16560982c6dd7c923b
         with:
           python-version: "3.10"
-      - run: python3 -m pip install mypy isort
+      - run: python3 -m pip install mypy isort build
       - run: |
           isort verify_release
           mypy verify_release
