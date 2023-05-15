@@ -1,14 +1,5 @@
 #!/usr/bin/env python
 
-# Copyright 2022, TUF contributors
-# SPDX-License-Identifier: MIT OR Apache-2.0
-
-"""verify_release - verify that published release matches a locally built one
-
-Builds a release from current commit and verifies that the release artifacts
-on GitHub and PyPI match the built release artifacts.
-"""
-
 import argparse
 import json
 import os
@@ -18,13 +9,9 @@ from filecmp import cmp
 from tempfile import TemporaryDirectory
 from typing import Optional
 
-try:
-    import build as _  # type: ignore
-    import requests
-except ImportError:
-    print("Error: verify_release requires modules 'requests' and 'build':")
-    print("    pip install requests build")
-    sys.exit(1)
+import build as _  # type: ignore
+
+import requests
 
 # Project variables
 # Note that only these project artifacts are supported:
