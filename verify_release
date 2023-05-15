@@ -9,8 +9,11 @@ from filecmp import cmp
 from tempfile import TemporaryDirectory
 from typing import Optional
 
-import build as _
-import requests
+try:
+    import build as _
+    import requests
+except ImportError:
+    sys.exit(1)
 
 # Project variables
 # Note that only these project artifacts are supported:
