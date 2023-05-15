@@ -9,7 +9,7 @@ from filecmp import cmp
 from tempfile import TemporaryDirectory
 from typing import Optional
 
-import build
+import build as _
 import requests
 
 # Project variables
