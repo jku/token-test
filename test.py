@@ -30,7 +30,7 @@ identity = Identity(
 )
 result = verifier.verify(materials, identity)
 print(f"\nVerify with {token.identity}")
-print(f"  {result})
+print(f"  {result}")
 
 # attempt verify with another identity and "expected_certificate_subject" as issuer
 identity2 = Identity(
@@ -39,4 +39,4 @@ identity2 = Identity(
 )
 result = verifier.verify(materials, identity2)
 print(f"\nVerify with other identity")
-print(f"  {result})
+print(f"  {result}")
