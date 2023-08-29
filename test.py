@@ -16,10 +16,10 @@ with context.signer(token) as signer:
     sign_result = signer.sign(io.BytesIO(b""))
     bundle = sign_result._to_bundle()
 
- materials = VerificationMaterials.from_bundle(
-     input_=io.BytesIO(b""),
-     bundle=bundle,
-     offline=True
+materials = VerificationMaterials.from_bundle(
+    input_=io.BytesIO(b""),
+    bundle=bundle,
+    offline=True
 )
 verifier = Verifier.production()
 
