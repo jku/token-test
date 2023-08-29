@@ -34,9 +34,9 @@ print(f"  {result}")
 
 # attempt verify with another identity and "expected_certificate_subject" as issuer
 identity2 = Identity(
-    identity="https://github.com/jku/token-test/.github/workflows/test-sign.yml@$refs/heads/main",
+    identity="https://github.com/jku/token-test/.github/workflows/test-sign.yml@refs/heads/main",
     issuer=token.expected_certificate_subject
 )
 result = verifier.verify(materials, identity2)
-print(f"\nVerify with other identity")
+print(f"\nVerify with https://github.com/jku/token-test/.github/workflows/test-sign.yml@refs/heads/main")
 print(f"  {result}")
