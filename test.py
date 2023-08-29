@@ -1,36 +1,42 @@
-import os
-from sigstore.oidc import detect_credential
-from securesystemslib.signer import (
-    KEY_FOR_TYPE_AND_SCHEME,
-    Key,
-    SigstoreKey,
-    SigstoreSigner,
+import io
+from sigstore.oidc import detect_credential, IdentityToken, Issuer
+from sigstore.sign import SigningContext
+from sigstore.verify import VerificationMaterials, Verifier
+from sigstore.verify.policy import Identity
+
+token = IdentityToken(detect_credential())
+
+print("IdentityToken")
+print(f"  identity: {token.identity}")
+print(f"  issuer: {token.issuer} (expected subject: {token.expected_certificate_subject})")
+
+# sign
+context = SigningContext.production()
+with context.signer(token) as signer:
+    sign_result = signer.sign(io.BytesIO(b""))
+    bundle = sign_result._to_bundle()
+
+ materials = VerificationMaterials.from_bundle(
+     input_=io.BytesIO(b""),
+     bundle=bundle,
+     offline=True
 )
+verifier = Verifier.production()
 
-KEY_FOR_TYPE_AND_SCHEME[("sigstore-oidc", "Fulcio")] = SigstoreKey
-
-token = detect_credential()
-url = os.environ["GITHUB_SERVER_URL"]
-repo = os.environ["GITHUB_REPOSITORY"]
-ref = os.environ["GITHUB_REF"]
-
-identity = f"{url}/{repo}/.github/workflows/test-sign.yml@{ref}"
-issuer="https://token.actions.githubusercontent.com"
-
-# TODO this should happen in SigstoreSigner.import_()
-public_key = Key.from_dict(
-  "abcdef",
-  {
-    "keytype": "sigstore-oidc",
-    "scheme": "Fulcio",
-    "keyval": {
-      "issuer": issuer,
-      "identity": identity,
-    },
-  },
+# attempt verify with same identity value and "expected_certificate_subject" as issuer
+identity = Identity(
+    identity=token.identity
+    issuer=token.expected_certificate_subject
 )
-signer = SigstoreSigner(token, public_key)
-sig = signer.sign(b"data")
+result = verifier.verify(materials, identity)
+print(f"\nVerify with {token.identity}")
+print(f"  {result})
 
-print("KEY", public_key.to_dict())
-print("SIG", sig.to_dict())
+# attempt verify with another identity and "expected_certificate_subject" as issuer
+identity2 = Identity(
+    identity="https://github.com/jku/token-test/.github/workflows/test-sign.yml@$refs/heads/main"
+    issuer=token.expected_certificate_subject
+)
+result = verifier.verify(materials, identity2)
+print(f"\nVerify with other identity")
+print(f"  {result})
