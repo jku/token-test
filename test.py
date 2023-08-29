@@ -23,7 +23,7 @@ materials = VerificationMaterials.from_bundle(
 )
 verifier = Verifier.production()
 
-# attempt verify with same identity value and "expected_certificate_subject" as issuer
+# attempt verify with same identity value and "expected_certificate_subject" as issuer: this fails as the identity does not match certificates SAN
 identity = Identity(
     identity=token.identity,
     issuer=token.expected_certificate_subject
@@ -33,7 +33,7 @@ assert not result
 print(f"\nVerify with {token.identity}")
 print(f"  {result}")
 
-# attempt verify with another identity and "expected_certificate_subject" as issuer
+# attempt verify with another identity and "expected_certificate_subject" as issuer: this succeeds
 identity2 = Identity(
     identity="https://github.com/jku/token-test/.github/workflows/test-sign.yml@refs/heads/main",
     issuer=token.expected_certificate_subject
