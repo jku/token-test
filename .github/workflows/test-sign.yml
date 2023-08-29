@@ -1,4 +1,4 @@
-name: CI
+name: Test signing
 on:
   workflow_dispatch:
 
@@ -16,7 +16,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install sigstore=2.0.0rc2
+          pip install sigstore==2.0.0rc2
       - name: Test
         run: |
           python test.py
