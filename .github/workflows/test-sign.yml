@@ -10,15 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Test gh
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh issue list
-          echo $?
-          gh issue list --search "abcd"
-          echo $?
-          gh search issues "abcd"
-          echo $?
+      - uses: actions/setup-python@61a6322f88396a6271a6ee3565807d608ecaddd1
+        with:
+          python-version: '3.x'
 
-          gh issue create --title "issue filed from CI for testing" --body "moar text"
+      - name: Install dependencies
+        run: |
+          pip install sigstore=2.0.0rc2
+      - name: Test
+        run: |
+          python test.py
