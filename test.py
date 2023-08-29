@@ -29,6 +29,7 @@ identity = Identity(
     issuer=token.expected_certificate_subject
 )
 result = verifier.verify(materials, identity)
+assert not result
 print(f"\nVerify with {token.identity}")
 print(f"  {result}")
 
@@ -38,5 +39,6 @@ identity2 = Identity(
     issuer=token.expected_certificate_subject
 )
 result = verifier.verify(materials, identity2)
+assert result
 print(f"\nVerify with https://github.com/jku/token-test/.github/workflows/test-sign.yml@refs/heads/main")
 print(f"  {result}")
