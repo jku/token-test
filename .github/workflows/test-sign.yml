@@ -11,7 +11,6 @@ jobs:
       - name: Test
         run: |
           echo event_name: ${{ github.event_name }}
-          echo test result [${{ github.event_name != "schedule" }}]
 
       - name: Test 2
         if: ${{ github.event_name != "schedule" }}
