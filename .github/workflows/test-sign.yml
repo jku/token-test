@@ -1,6 +1,8 @@
 name: Test signing
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '*/5 * * * *'
 
 jobs:
   build:
@@ -9,6 +11,9 @@ jobs:
       - name: Test
         run: |
           echo event_name: ${{ github.event_name }}
-          echo event: ${{ github.event }}
-          echo workflow_dispatch: ${{ github.event.workflow_dispatch }}
-          echo schedule: ${{ github.event.schedule }}
+          echo test result [${{ github.event_name != "schedule" }}]
+
+      - name: Test 2
+        if: ${{ github.event_name != "schedule" }}
+        run: |
+          echo "not schedule / cron"
