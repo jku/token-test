@@ -13,6 +13,6 @@ jobs:
           echo event_name: ${{ github.event_name }}
 
       - name: Test 2
-        if: github.event_name != "schedule"
+        if: github.event_name != 'schedule'
         run: |
           echo "not schedule / cron"
