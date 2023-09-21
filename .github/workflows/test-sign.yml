@@ -2,21 +2,19 @@ name: Test signing
 on:
   workflow_dispatch:
 
+  test2:
+    if: ${{ github.event_name }} = "test2"
+    runs-on: ubuntu-latest
+    steps:
+      run: |
+        echo "test2"
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
     steps:
-      - uses: actions/checkout@v3
-
-      - uses: actions/setup-python@61a6322f88396a6271a6ee3565807d608ecaddd1
-        with:
-          python-version: '3.x'
-
-      - name: Install dependencies
-        run: |
-          pip install sigstore==2.0.0rc2
       - name: Test
         run: |
-          python test.py
+          echo event_name: ${{ github.event_name }}
+          echo event: ${{ github.event }}
+          echo workflow_dispatch: ${{ github.event.workflow_dispatch }}
+          echo schedule: ${{ github.event.schedule }}
