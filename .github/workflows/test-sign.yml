@@ -1,6 +1,11 @@
 name: Test signing
 on:
   workflow_dispatch:
+  push:
+    branches:
+    - testbranch
+    paths:
+    - 'testdir/**'
 
 jobs:
   build:
@@ -9,8 +14,3 @@ jobs:
       - name: Test
         run: |
           echo event_name: ${{ github.event_name }}
-
-      - name: Test 2
-        if: github.event_name != 'schedule'
-        run: |
-          echo "not schedule / cron"
