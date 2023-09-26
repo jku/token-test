@@ -13,4 +13,5 @@ jobs:
     steps:
       - name: Test
         run: |
-          echo event_name: ${{ github.event_name }}
+          git tag -a v0.1 -m "test tag protection"
+          git push --tags
